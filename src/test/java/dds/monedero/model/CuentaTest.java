@@ -11,10 +11,12 @@ import static org.junit.jupiter.api.Assertions.*;
 
 public class CuentaTest {
   private Cuenta cuenta;
-
+  private double limiteExtraccionDiario = 1000;
   @BeforeEach
   void init() {
-    cuenta = new Cuenta();
+    double montoInicial = 0;
+
+    cuenta = new Cuenta(montoInicial, limiteExtraccionDiario);
   }
 
   @Test
@@ -50,17 +52,18 @@ public class CuentaTest {
 
   @Test
   void ExtraerMasQueElSaldo() {
+    double saldo = 90;
     assertThrows(SaldoMenorException.class, () -> {
           cuenta.setSaldo(90);
-          cuenta.extraer(1001);
+          cuenta.extraer(saldo + 1);
     });
   }
 
   @Test
-  public void ExtraerMasDe1000() {
+  public void ExtraerMasDelLimiteDiario() {
     assertThrows(MaximoExtraccionDiarioException.class, () -> {
       cuenta.setSaldo(5000);
-      cuenta.extraer(1001);
+      cuenta.extraer(limiteExtraccionDiario + 1);
     });
   }
 

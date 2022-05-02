@@ -16,11 +16,11 @@ public class Cuenta {
   private List<Movimiento> movimientos = new ArrayList<>();
 
   public Cuenta() {
-    saldo = 0;
   }
 
-  public Cuenta(double montoInicial) {
-    saldo = montoInicial;
+  public Cuenta(double montoInicial, double limiteExtraccionDiario) {
+    this.saldo = montoInicial;
+    this.limiteExtraccionDiario =  limiteExtraccionDiario;
   }
 
   public void setMovimientos(List<Movimiento> movimientos) {
