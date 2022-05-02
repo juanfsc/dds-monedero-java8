@@ -27,14 +27,14 @@ public class Cuenta {
     this.movimientos = movimientos;
   }
 
-  public void poner(double cuanto) {
+  public void depositar(double cuanto) {
     puedeRealizarMovimiento(cuanto);
     puedeRealizarDeposito();
     setSaldo(getSaldo()+cuanto);
     agregarMovimiento(LocalDate.now(), cuanto, true);
   }
 
-  public void sacar(double cuanto) {
+  public void extraer(double cuanto) {
     puedeRealizarMovimiento(cuanto);
     puedeSacarNoExcedeSaldo(cuanto);
     puedeSacarLimiteDiario(cuanto);
