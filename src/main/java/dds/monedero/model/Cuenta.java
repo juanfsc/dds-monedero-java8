@@ -32,13 +32,8 @@ public class Cuenta {
       throw new MontoNegativoException(cuanto + ": el monto a ingresar debe ser un valor positivo");
     }
     puedeRealizarDeposito();
-    new Movimiento(LocalDate.now(), cuanto, true).agregateA(this);
-  }
-
-  private void puedeRealizarDeposito() {
-    if (getMovimientos().stream().filter(movimiento -> movimiento.isDeposito()).count() >= 3) {
-      throw new MaximaCantidadDepositosException("Ya excedio los " + 3 + " depositos diarios");
-    }
+    setSaldo(getSaldo()+cuanto);
+    agregarMovimiento(LocalDate.now(), cuanto, true);
   }
 
   public void sacar(double cuanto) {
@@ -47,20 +42,8 @@ public class Cuenta {
     }
     puedeSacarNoExcedeSaldo(cuanto);
     puedeSacarLimiteDiario(cuanto);
-    new Movimiento(LocalDate.now(), cuanto, false).agregateA(this);
-  }
-  private void puedeSacarNoExcedeSaldo(double cuanto) {
-    if (getSaldo() - cuanto < 0) {
-      throw new SaldoMenorException("No puede sacar mas de " + getSaldo() + " $");
-    }
-  }
-  private void puedeSacarLimiteDiario(double cuanto) {
-    double montoExtraidoHoy = getMontoExtraidoA(LocalDate.now());
-    double limiteRestante = this.limiteExtraccionDiario - montoExtraidoHoy;
-    if (cuanto > limiteRestante) {
-      throw new MaximoExtraccionDiarioException("No puede extraer mas de $ " + 1000
-          + " diarios, límite: " + limiteRestante);
-    }
+    setSaldo(getSaldo()-cuanto);
+    agregarMovimiento(LocalDate.now(), cuanto, false);
   }
 
   public void agregarMovimiento(LocalDate fecha, double cuanto, boolean esDeposito) {
@@ -85,6 +68,27 @@ public class Cuenta {
 
   public void setSaldo(double saldo) {
     this.saldo = saldo;
+  }
+
+  private void puedeSacarNoExcedeSaldo(double cuanto) {
+    if (getSaldo() - cuanto < 0) {
+      throw new SaldoMenorException("No puede sacar mas de " + getSaldo() + " $");
+    }
+  }
+
+  private void puedeSacarLimiteDiario(double cuanto) {
+    double montoExtraidoHoy = getMontoExtraidoA(LocalDate.now());
+    double limiteRestante = this.limiteExtraccionDiario - montoExtraidoHoy;
+    if (cuanto > limiteRestante) {
+      throw new MaximoExtraccionDiarioException("No puede extraer mas de $ " + 1000
+          + " diarios, límite: " + limiteRestante);
+    }
+  }
+
+  private void puedeRealizarDeposito() {
+    if (getMovimientos().stream().filter(movimiento -> movimiento.isDeposito()).count() >= 3) {
+      throw new MaximaCantidadDepositosException("Ya excedio los " + 3 + " depositos diarios");
+    }
   }
 
 }
