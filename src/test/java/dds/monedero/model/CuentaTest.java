@@ -20,19 +20,19 @@ public class CuentaTest {
   }
 
   @Test
-  void Depositar() {
+  void PuedeDepositar() {
     double saldo = 1500;
     cuenta.depositar(saldo);
     assertEquals(cuenta.getSaldo(), saldo);
   }
 
   @Test
-  void PonerMontoNegativo() {
+  void NoPuedeDepositarMontoNegativo() {
     assertThrows(MontoNegativoException.class, () -> cuenta.depositar(-1500));
   }
 
   @Test
-  void TresDepositos() {
+  void PuedeRealizarTresDepositos() {
     cuenta.depositar(1500);
     cuenta.depositar(456);
     cuenta.depositar(1900);
@@ -41,7 +41,7 @@ public class CuentaTest {
   }
 
   @Test
-  void MasDeTresDepositos() {
+  void NoPuedeRealizarMasDeTresDepositos() {
     assertThrows(MaximaCantidadDepositosException.class, () -> {
           cuenta.depositar(1500);
           cuenta.depositar(456);
@@ -51,7 +51,7 @@ public class CuentaTest {
   }
 
   @Test
-  void ExtraerMasQueElSaldo() {
+  void NoPuedeExtraerMasQueElSaldo() {
     double saldo = 90;
     assertThrows(SaldoMenorException.class, () -> {
           cuenta.setSaldo(90);
@@ -60,7 +60,7 @@ public class CuentaTest {
   }
 
   @Test
-  public void ExtraerMasDelLimiteDiario() {
+  public void NoPuedeExtraerMasDelLimiteDiario() {
     assertThrows(MaximoExtraccionDiarioException.class, () -> {
       cuenta.setSaldo(5000);
       cuenta.extraer(limiteExtraccionDiario + 1);
@@ -68,7 +68,7 @@ public class CuentaTest {
   }
 
   @Test
-  public void ExtraerMontoNegativo() {
+  public void NoPuedeExtraerMontoNegativo() {
     assertThrows(MontoNegativoException.class, () -> cuenta.extraer(-500));
   }
 
