@@ -60,7 +60,7 @@ public class CuentaTest {
   }
 
   @Test
-  public void NoPuedeExtraerMasDelLimiteDiario() {
+  void NoPuedeExtraerMasDelLimiteDiario() {
     assertThrows(MaximoExtraccionDiarioException.class, () -> {
       cuenta.setSaldo(5000);
       cuenta.extraer(limiteExtraccionDiario + 1);
@@ -68,7 +68,7 @@ public class CuentaTest {
   }
 
   @Test
-  public void NoPuedeExtraerMontoNegativo() {
+  void NoPuedeExtraerMontoNegativo() {
     assertThrows(MontoNegativoException.class, () -> cuenta.extraer(-500));
   }
 
