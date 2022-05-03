@@ -15,9 +15,6 @@ public class Cuenta {
   private double limiteExtraccionDiario = 1000;
   private List<Movimiento> movimientos = new ArrayList<>();
 
-  public Cuenta() {
-  }
-
   public Cuenta(double montoInicial, double limiteExtraccionDiario) {
     this.saldo = montoInicial;
     this.limiteExtraccionDiario =  limiteExtraccionDiario;
@@ -62,7 +59,7 @@ public class Cuenta {
     return saldo;
   }
 
-  public void setSaldo(double saldo) {
+  private void setSaldo(double saldo) {
     this.saldo = saldo;
   }
 

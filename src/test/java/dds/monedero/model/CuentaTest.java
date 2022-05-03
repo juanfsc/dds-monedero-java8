@@ -52,17 +52,15 @@ public class CuentaTest {
 
   @Test
   void NoPuedeExtraerMasQueElSaldo() {
-    double saldo = 90;
     assertThrows(SaldoMenorException.class, () -> {
-          cuenta.setSaldo(90);
-          cuenta.extraer(saldo + 1);
+          cuenta.extraer(1);
     });
   }
 
   @Test
   void NoPuedeExtraerMasDelLimiteDiario() {
+    cuenta = new Cuenta(limiteExtraccionDiario + 2, limiteExtraccionDiario);
     assertThrows(MaximoExtraccionDiarioException.class, () -> {
-      cuenta.setSaldo(5000);
       cuenta.extraer(limiteExtraccionDiario + 1);
     });
   }

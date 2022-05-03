@@ -1,5 +1,19 @@
 ## Monedero
-
+### Code smells
+- Cuenta.setSaldo() no deberíamos querer cambiar el *Saldo* de un *Cuenta* sin realizar un movimiento.
+- Dos constructores de *Cuenta*, uno no era utilizado.
+- Cuenta.setSaldo(), ¿está bien poder cambiar la lista de *Movimientos* de una *Cuenta* ?
+- Cuenta.sacar() no decrementa el valor del atributo *Saldo* de la Clase *Cuenta*.
+- Cuenta.poner() no incrementa el valor del atributo *Saldo* de la Clase *Cuenta*.
+- el Atributo *Saldo* sería una especie de *Cache*, este valor podría calcularse haciendo una Sumatoria de los montos de
+todos los movimientos, teniendo en cuenta que las extracciones tendrian monto negativo, de ser numerosos *Movimientos*
+podría justificarse el guardado del Saldo en cada extraccion/depósito 
+- Cuenta.sacar() y Cuenta.poner() vs Cuenta.extraer() y Cuenta.depositar(), los segundos nombres parecen ser mas acordes
+al dominio.
+- Las validaciones en Cuenta.sacar() y Cuenta.poner() incomodan la lectura de los metodos, se abstraen las validaciones 
+a metodos separados.
+- ¿ Tiene sentido Separar la idea de un Movimiento en clases Extraccion y Deposito en lugar de manejar un boolean 
+isDeposito dentro de Movimiento.
 ### Contexto
 
 Este repositorio contiene el código de un _monedero virtual_, al que podemos agregarle y quitarle dinero, a través 
