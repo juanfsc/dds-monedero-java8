@@ -28,7 +28,7 @@ public class Cuenta {
     puedeRealizarMovimiento(cuanto);
     puedeRealizarDeposito();
     setSaldo(getSaldo()+cuanto);
-    agregarMovimiento(LocalDate.now(), cuanto, true);
+    agregarMovimiento(new Deposito(LocalDate.now(), cuanto));
   }
 
   public void extraer(double cuanto) {
@@ -36,11 +36,10 @@ public class Cuenta {
     puedeSacarNoExcedeSaldo(cuanto);
     puedeSacarLimiteDiario(cuanto);
     setSaldo(getSaldo()-cuanto);
-    agregarMovimiento(LocalDate.now(), cuanto, false);
+    agregarMovimiento(new Extraccion(LocalDate.now(), cuanto));
   }
 
-  public void agregarMovimiento(LocalDate fecha, double cuanto, boolean esDeposito) {
-    Movimiento movimiento = new Movimiento(fecha, cuanto, esDeposito);
+  public void agregarMovimiento(Movimiento movimiento) {
     movimientos.add(movimiento);
   }
 
