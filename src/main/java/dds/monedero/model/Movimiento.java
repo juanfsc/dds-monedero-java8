@@ -37,4 +37,6 @@ public abstract class Movimiento {
 
   public abstract double calcularValor();
 
+  public abstract boolean extraidoEn(LocalDate date);
+
 }

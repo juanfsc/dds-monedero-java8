@@ -21,4 +21,9 @@ public class Extraccion extends Movimiento {
   public double calcularValor(){
     return (-1)*super.getMonto();
   }
+
+  @Override
+  public boolean extraidoEn(LocalDate date){
+    return date.equals(super.getFecha());
+  }
 }

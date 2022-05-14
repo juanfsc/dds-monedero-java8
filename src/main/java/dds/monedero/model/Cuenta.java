@@ -27,8 +27,9 @@ public class Cuenta {
   public void depositar(double cuanto) {
     puedeRealizarMovimiento(cuanto);
     puedeRealizarDeposito();
-    setSaldo(getSaldo()+cuanto);
-    agregarMovimiento(new Deposito(LocalDate.now(), cuanto));
+    Deposito deposito = new Deposito(LocalDate.now(), cuanto);
+    agregarMovimiento(deposito);
+    setSaldo(getSaldo()+deposito.getMonto());
   }
 
   public void extraer(double cuanto) {

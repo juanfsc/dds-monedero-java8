@@ -21,4 +21,9 @@ public class Deposito extends Movimiento {
   public double calcularValor(){
     return super.getMonto();
   }
+
+  @Override
+  public boolean extraidoEn(LocalDate date){
+    return false;
+  }
 }
