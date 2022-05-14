@@ -35,8 +35,9 @@ public class Cuenta {
     puedeRealizarMovimiento(cuanto);
     puedeSacarNoExcedeSaldo(cuanto);
     puedeSacarLimiteDiario(cuanto);
-    setSaldo(getSaldo()-cuanto);
-    agregarMovimiento(new Extraccion(LocalDate.now(), cuanto));
+    Extraccion extraccion = new Extraccion(LocalDate.now(), cuanto);
+    agregarMovimiento(extraccion);
+    setSaldo(getSaldo()+extraccion.getMonto());
   }
 
   public void agregarMovimiento(Movimiento movimiento) {

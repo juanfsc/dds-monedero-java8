@@ -3,10 +3,8 @@ package dds.monedero.model;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
 import java.time.LocalDate;
 
-import static org.junit.jupiter.api.Assertions.*;
 
 class MovimientoTest {
   Movimiento deposito;
@@ -14,8 +12,8 @@ class MovimientoTest {
 
   @BeforeEach
   void init(){
-    deposito = new Movimiento(LocalDate.now(), 1000, true);
-    extraccion = new Movimiento(LocalDate.now(), 1000, false);
+    deposito = new Deposito(LocalDate.now(), 1000);
+    extraccion = new Extraccion(LocalDate.now(), 1000);
   }
 
   @Test
